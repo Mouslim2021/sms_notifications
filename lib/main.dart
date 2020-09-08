@@ -7,11 +7,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'diakite',
+      debugShowCheckedModeBanner: false,
+      title: 'sms notifications',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Sms Notifications'),
     );
   }
 }
@@ -32,6 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
+        child: Text("Entrer un texte !!!"),
       ),
     );
   }
