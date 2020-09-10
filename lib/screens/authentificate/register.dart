@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:sms_notifications/services/auth.dart';
 
-class SignIn extends StatefulWidget {
+class Register extends StatefulWidget {
 
   final Function toggleView;
-  SignIn({this.toggleView});
-
+  Register({this.toggleView});
   @override
-  _SignInState createState() => _SignInState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _SignInState extends State<SignIn> {
-
+class _RegisterState extends State<Register> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
 
@@ -19,18 +17,20 @@ class _SignInState extends State<SignIn> {
   String email ='';
   String password ='';
   String error = '';
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Connexion'),
+        title: Text('Inscription'),
         actions: <Widget>[
           FlatButton.icon(
             onPressed: (){
               widget.toggleView();
             },
             icon: Icon(Icons.person), 
-            label: Text('Inscription'))
+            label: Text('Connexion'))
         ],
       ),
       body: Container(
@@ -43,7 +43,7 @@ class _SignInState extends State<SignIn> {
                 height: 20,
               ),
               TextFormField(
-                decoration: InputDecoration(
+                 decoration: InputDecoration(
                   hintText: 'Email',
                   labelText: 'Entrez votre email',
                   enabledBorder: OutlineInputBorder(
@@ -59,7 +59,7 @@ class _SignInState extends State<SignIn> {
                     )
                   ),
                 ),
-                 validator: (val) => val.isEmpty ? 'L\'email est obligatoire' : null,
+                validator: (val) => val.isEmpty ? 'L\'email est obligatoire' : null,
                 onChanged: (val){
                   setState(() {
                     email = val;
@@ -71,7 +71,7 @@ class _SignInState extends State<SignIn> {
                 height: 20,
               ),
               TextFormField(
-                decoration: InputDecoration(
+                 decoration: InputDecoration(
                   hintText: 'Mot de passe',
                   labelText: 'Entrez votre mot de passe',
                   enabledBorder: OutlineInputBorder(
@@ -101,18 +101,18 @@ class _SignInState extends State<SignIn> {
               ),
               RaisedButton(
                 color: Colors.blue,
-                child: Text('Connexion'),
+                child: Text('Inscription'),
                 onPressed: () async{
-                   if(_formKey.currentState.validate()){
-                   dynamic result = _auth.signInWithEmailAndPassword(email, password);
-                   if(result == null){
+                  if(_formKey.currentState.validate()){
+                    dynamic result = _auth.registerWithEmailAndPassword(email, password);
+                    if(result == null){
                       setState(() {
-                        error = 'La connexion est impossible avec ces informations';
+                        error = 'Veuillez entrer un mot de passe valide';
                       });
                     }
                   }
                 }),
-                 SizedBox(
+                SizedBox(
                 height: 10,
               ),
               Text(error,
