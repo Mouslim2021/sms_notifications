@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sms_notifications/screens/loading.dart';
 import 'package:sms_notifications/services/auth.dart';
 
 class SignIn extends StatefulWidget {
@@ -15,13 +16,15 @@ class _SignInState extends State<SignIn> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
 
+  bool loading = false;
+
 
   String email ='';
   String password ='';
   String error = '';
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading ? Loadong() : Scaffold(
       appBar: AppBar(
         title: Text('Connexion'),
         actions: <Widget>[
@@ -104,10 +107,14 @@ class _SignInState extends State<SignIn> {
                 child: Text('Connexion'),
                 onPressed: () async{
                    if(_formKey.currentState.validate()){
+                     setState(() {
+                       loading = true;
+                     });
                    dynamic result = _auth.signInWithEmailAndPassword(email, password);
                    if(result == null){
                       setState(() {
                         error = 'La connexion est impossible avec ces informations';
+                        loading = false;
                       });
                     }
                   }

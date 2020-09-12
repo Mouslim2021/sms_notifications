@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sms_notifications/screens/loading.dart';
 import 'package:sms_notifications/services/auth.dart';
 
 class Register extends StatefulWidget {
@@ -13,6 +14,8 @@ class _RegisterState extends State<Register> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
 
+  bool loading = false;
+
 
   String email ='';
   String password ='';
@@ -21,7 +24,7 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading ? Loadong() : Scaffold(
       appBar: AppBar(
         title: Text('Inscription'),
         actions: <Widget>[
@@ -104,10 +107,14 @@ class _RegisterState extends State<Register> {
                 child: Text('Inscription'),
                 onPressed: () async{
                   if(_formKey.currentState.validate()){
+                    setState(() {
+                      loading = true;
+                    });
                     dynamic result = _auth.registerWithEmailAndPassword(email, password);
                     if(result == null){
                       setState(() {
-                        error = 'Veuillez entrer un mot de passe valide';
+                        error = 'Veuillez entrer un email valide';
+                        loading = false;
                       });
                     }
                   }
