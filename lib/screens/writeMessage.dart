@@ -22,9 +22,19 @@ class _WriteMessageState extends State<WriteMessage> {
         ),
         body: Column(
           children: <Widget>[
+            SizedBox(
+              height: 20,
+            ),
             Row(
               children: <Widget>[
-                Text('Selectionnez un groupe'),
+                Text('Selectionnez un groupe',
+                style: TextStyle(
+                  fontSize: 18
+                ),
+                ),
+                SizedBox(
+              width: 40,
+            ),
                 DropdownButton<String>(
                   value: selectedItem,
                   onChanged: (String string) =>
@@ -48,19 +58,18 @@ class _WriteMessageState extends State<WriteMessage> {
               height: 20,
             ),
             TextFormField(
-              minLines: 6,
-              maxLength: 8,
+              maxLines: 5,
               decoration: InputDecoration(
                 labelText: 'Message',
                 hintText: 'Ecrivez le message à envoyer',
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: Colors.blue,
+                    color: Colors.grey,
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: Colors.grey,
+                    color: Colors.blue,
                   ),
                 ),
               ),
