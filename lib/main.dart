@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sms_notifications/screens/home/home.dart';
 import 'package:sms_notifications/screens/wrapper.dart';
 import 'package:provider/provider.dart';
 import 'package:sms_notifications/services/auth.dart';
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
+        // home: Home(),
         home: Wrapper(),
       ),
     );
